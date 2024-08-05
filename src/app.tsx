@@ -1,4 +1,4 @@
-import { ArrowRight, AtSign, Calendar, MapPin, Plus, Settings2, UserRoundPlus, X } from "lucide-react"
+import { ArrowRight, AtSign, Calendar, Mail, MapPin, Plus, Settings2, User, UserRoundPlus, X } from "lucide-react"
 import { FormEvent, useState } from "react"
 
 
@@ -6,6 +6,7 @@ export const App = () => {
   const [isKeepOn, setIsKeepOn] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [emailInvite, setEmailInvite] = useState(["mariopaulo@gmailcom"]);
+  const [isDialogConfirmOpen, setIsDialogConfirmOpen] = useState(false);
 
   const handleIsKeepOn = () => {
     setIsKeepOn(!isKeepOn);
@@ -38,6 +39,11 @@ export const App = () => {
 
     setEmailInvite(newListEmailInvite);
   }
+
+  const handleIsDialogConfirmOpen = () => {
+    setIsDialogConfirmOpen(!isDialogConfirmOpen);
+  }
+
 
   return (
     <main className="w-full h-screen flex items-center justify-center bg-mask bg-no-repeat bg-center" >
@@ -87,10 +93,17 @@ export const App = () => {
 
                 <button className="flex w-full h-full gap-2 items-center flex-1" onClick={() => handleIsDialogOpen()}>
                   <UserRoundPlus className="size-5 text-zinc-400" />
-                  <span className="bg-transparent text-zinc-400 text-lg outline-none" >Quem estará na viagem?</span>
+                  {
+                    (emailInvite.length > 0) ? (
+                      <span className="bg-transparent text-zinc-50 text-lg outline-none" >{emailInvite.length} pessoa(s) convidada(s)</span>
+                    ) : (
+                      <span className="bg-transparent text-zinc-400 text-lg outline-none" >Quem estará na viagem?</span>
+                    )
+                  }
+
                 </button>
 
-                <button className="flex items-center rounded-lg text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-9 gap-2" >
+                <button onClick={() => handleIsDialogConfirmOpen()} className="flex items-center rounded-lg text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-9 gap-2" >
                   Confirmar Viagem
                   <ArrowRight />
                 </button>
@@ -98,7 +111,6 @@ export const App = () => {
               </div>
             )
           }
-
         </div>
 
 
@@ -161,6 +173,47 @@ export const App = () => {
           )
         }
 
+        {
+          isDialogConfirmOpen && (
+            <div className="bg-zinc-950/80 fixed inset-0 flex items-center justify-center"  >
+
+              <div className="flex flex-col space-y-5 w-[600px] bg-zinc-900 rounded-xl px-5 py-6 " >
+
+                <div className="text-left " >
+                  <div className="flex justify-between items-center " >
+                    <h1 className="text-xl font-medium text-white" >Confirmar criação da viagem</h1>
+                    <button onClick={() => handleIsDialogConfirmOpen()} >
+                      <X className="size-5 text-zinc-500 hover:text-zinc-300" />
+                    </button>
+                  </div>
+
+                  <p className="text-sm text-zinc-500 text-start">Para concluir a criação da viagem para <span className="text-white font-semibold">Florianópolis, Brasil</span> nas datas de <span className="text-white font-semibold" >16 a 27 de Agosto de 2024</span> preencha seus dados abaixo:</p>
+
+                </div>
+
+                <form onSubmit={addNewEmailToInvite} className="space-y-3" >
+
+                  <div className="flex h-[56px] px-2 gap-2 items-center bg-zinc-950 border border-zinc-800 rounded-md">
+                    <User className="size-5 text-zinc-400" />
+                    <input name="name" placeholder="Seu nome completo" className="bg-transparent text-md text-zinc-300 w-[70%]  outline-none" />
+                  </div>
+
+                  <div className="flex h-[56px] px-2 gap-2 items-center bg-zinc-950 border border-zinc-800 rounded-md">
+                    <Mail className="size-5 text-zinc-400" />
+                    <input name="email" type="email" placeholder="Seu e-mail pessoal" className="bg-transparent text-md text-zinc-300 w-[70%]  outline-none" />
+                  </div>
+
+                  <button type="submit" className=" w-full flex items-center rounded-lg  justify-center text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-11 gap-2" >
+                    Convidar
+                  </button>
+
+                </form>
+
+              </div>
+
+            </div>
+          )
+        }
       </div>
     </main>
   )
