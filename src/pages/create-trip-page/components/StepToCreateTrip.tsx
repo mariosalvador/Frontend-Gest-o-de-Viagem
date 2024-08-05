@@ -1,17 +1,18 @@
 import { ArrowRight, Calendar, MapPin, Settings2, UserRoundPlus } from "lucide-react"
+import { Button } from "../../../components/button";
 
 
-interface StepToCreateTrip{
-    isKeepOn:boolean;
-    handleIsKeepOn:()=>void;
-    emailInvite:string[];
-    handleIsDialogOpen:()=>void;
-    handleIsDialogConfirmOpen:()=>void;
+interface StepToCreateTrip {
+    isKeepOn: boolean;
+    handleIsKeepOn: () => void;
+    emailInvite: string[];
+    handleIsDialogOpen: () => void;
+    handleIsDialogConfirmOpen: () => void;
 
 }
 
 
-export const StepToCreateTrip:React.FC<StepToCreateTrip> = ({emailInvite,handleIsDialogConfirmOpen,handleIsDialogOpen,handleIsKeepOn,isKeepOn}) => {
+export const StepToCreateTrip: React.FC<StepToCreateTrip> = ({ emailInvite, handleIsDialogConfirmOpen, handleIsDialogOpen, handleIsKeepOn, isKeepOn }) => {
     return (
         <div className="flex flex-col space-y-4">
 
@@ -31,14 +32,16 @@ export const StepToCreateTrip:React.FC<StepToCreateTrip> = ({emailInvite,handleI
 
                 {
                     isKeepOn ? (
-                        <button className="flex items-center rounded-lg text-zinc-200 font-medium bg-zinc-800 hover:bg-zinc-700x p-5 h-9 gap-3" onClick={() => handleIsKeepOn()} >
+
+                        <Button onClick={() => handleIsKeepOn()} variant={"secondary"} >
                             Alterar local/data
                             <Settings2 />
-                        </button>) : (
-                        <button className="flex items-center rounded-lg text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-9 gap-2" onClick={() => handleIsKeepOn()} >
+                        </Button>
+                    ) : (
+                        <Button onClick={() => handleIsKeepOn()} variant={"primary"} >
                             Continuar
                             <ArrowRight />
-                        </button>
+                        </Button>
                     )
                 }
 
@@ -58,11 +61,10 @@ export const StepToCreateTrip:React.FC<StepToCreateTrip> = ({emailInvite,handleI
                             }
                         </button>
 
-                        <button onClick={() => handleIsDialogConfirmOpen()} className="flex items-center rounded-lg text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-9 gap-2" >
+                        <Button onClick={() => handleIsDialogConfirmOpen()} variant={"primary"} >
                             Confirmar Viagem
                             <ArrowRight />
-                        </button>
-
+                        </Button>
                     </div>
                 )
             }

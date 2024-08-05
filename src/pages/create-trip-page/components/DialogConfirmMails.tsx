@@ -1,5 +1,6 @@
 import { AtSign, Plus, X } from "lucide-react"
 import { FormEvent } from "react";
+import { Button } from "../../../components/button";
 
 interface DialogConfirmMailsProps {
     handleIsDialogOpen: () => void;
@@ -55,10 +56,10 @@ export const DialogConfirmMails: React.FC<DialogConfirmMailsProps> = ({ addNewEm
                         <input name="email" type="email" placeholder="Digite o e-mail do convidado" className="bg-transparent text-sm text-zinc-300  outline-none" />
                     </div>
 
-                    <button type="submit" className="flex items-center rounded-lg text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-9 gap-2" >
+                    <Button type="submit" variant={"primary"}>
                         Convidar
                         <Plus />
-                    </button>
+                    </Button>
 
                 </form>
 

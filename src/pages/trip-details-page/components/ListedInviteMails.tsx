@@ -1,4 +1,5 @@
 import { CircleDashed, CircleCheck, UserCog } from "lucide-react"
+import { Button } from "../../../components/button"
 
 
 export const ListedInviteMails = () => {
@@ -49,11 +50,10 @@ export const ListedInviteMails = () => {
 
             </div>
 
-
-            <button type="submit" className="flex justify-center items-center rounded-lg text-zinc-200 font-medium bg-zinc-800 w-full p-5 h-9 gap-2" >
+            <Button type="submit" variant={"secondary"} size="full" >
                 <UserCog className="size-5 text-zinc-400 " />
                 Gerenciar convidados
-            </button>
+            </Button>
 
         </div>
     )

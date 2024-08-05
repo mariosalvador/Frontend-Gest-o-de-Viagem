@@ -1,13 +1,14 @@
 import { Calendar, Tag, X } from "lucide-react"
 import { FormEvent } from "react";
+import { Button } from "../../../components/button";
 
 interface DialogCreateActivityProps {
-    openAndCloseDialogCreateActivity:()=>void;
-    handleSubmit:(event:FormEvent<HTMLFormElement>)=>void;
+    openAndCloseDialogCreateActivity: () => void;
+    handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 
-export const DialogCreateActivity:React.FC<DialogCreateActivityProps> = ({handleSubmit,openAndCloseDialogCreateActivity}) => {
+export const DialogCreateActivity: React.FC<DialogCreateActivityProps> = ({ handleSubmit, openAndCloseDialogCreateActivity }) => {
     return (
         <div className="bg-zinc-950/80 fixed inset-0 flex items-center justify-center"  >
 
@@ -37,10 +38,9 @@ export const DialogCreateActivity:React.FC<DialogCreateActivityProps> = ({handle
                         <input name="date" type="datetime-local" placeholder="20 de agosto" className="bg-transparent text-md text-zinc-300 w-[100%]  outline-none [color-scheme:dark] " />
                     </div>
 
-
-                    <button type="submit" className=" w-full flex items-center rounded-lg  justify-center text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-11 gap-2" >
+                    <Button type="submit" variant={"primary"} size="full" >
                         Salvar atividade
-                    </button>
+                    </Button>
 
                 </form>
 

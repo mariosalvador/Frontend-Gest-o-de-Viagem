@@ -1,14 +1,15 @@
 import { Mail, User, X } from "lucide-react"
 import { FormEvent } from "react";
+import { Button } from "../../../components/button";
 
-interface DialogConfirmTripProps{
-    handleIsDialogConfirmOpen: ()=>void;
-    confirmTrip: (event: FormEvent<HTMLElement>)=> void;
+interface DialogConfirmTripProps {
+    handleIsDialogConfirmOpen: () => void;
+    confirmTrip: (event: FormEvent<HTMLElement>) => void;
 }
 
 
-export const DialogConfirmTrip:React.FC<DialogConfirmTripProps> = ({confirmTrip,handleIsDialogConfirmOpen}) => {
-    
+export const DialogConfirmTrip: React.FC<DialogConfirmTripProps> = ({ confirmTrip, handleIsDialogConfirmOpen }) => {
+
 
     return (
         <div className="bg-zinc-950/80 fixed inset-0 flex items-center justify-center"  >
@@ -39,9 +40,9 @@ export const DialogConfirmTrip:React.FC<DialogConfirmTripProps> = ({confirmTrip,
                         <input name="email" type="email" placeholder="Seu e-mail pessoal" className="bg-transparent text-md text-zinc-300 w-[70%]  outline-none" />
                     </div>
 
-                    <button type="submit" className=" w-full flex items-center rounded-lg  justify-center text-lime-950 font-medium bg-lime-500 hover:bg-lime-400 p-5 h-11 gap-2" >
+                    <Button type="submit" variant={"primary"} size="full" >
                         Convidar
-                    </button>
+                    </Button>
 
                 </form>
 
