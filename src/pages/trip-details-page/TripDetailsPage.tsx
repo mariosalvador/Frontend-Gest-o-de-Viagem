@@ -7,6 +7,7 @@ import { ListedInviteMails } from "./components/ListedInviteMails"
 
 
 
+
 export const TripDetailsPage = () => {
     const [isDialogCreateActivityOpen, setIsDialogCreateActivityOpen] = useState(false)
 
@@ -38,6 +39,8 @@ export const TripDetailsPage = () => {
                         Alterar local/data
                         <Settings2 />
                     </button>
+
+                  
 
                 </div>
             </header>
