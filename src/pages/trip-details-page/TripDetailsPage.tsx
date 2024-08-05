@@ -4,6 +4,7 @@ import { DialogCreateActivity } from "./components/DialogCreateActivity"
 import { CreatedAndListedComponents } from "./components/CreatedAndListedComponents"
 import { ListedImportantLinks } from "./components/ListedImportantLinks"
 import { ListedInviteMails } from "./components/ListedInviteMails"
+import { Button } from "../../components/button"
 
 
 
@@ -35,12 +36,10 @@ export const TripDetailsPage = () => {
                     </div>
                     <div className="w-px h-7 bg-zinc-800" />
 
-                    <button className="flex items-center rounded-lg text-zinc-200 font-medium bg-zinc-800 hover:bg-zinc-700x p-5 h-9 gap-3"  >
+                    <Button variant={"secondary"}>
                         Alterar local/data
                         <Settings2 />
-                    </button>
-
-                  
+                    </Button>
 
                 </div>
             </header>
