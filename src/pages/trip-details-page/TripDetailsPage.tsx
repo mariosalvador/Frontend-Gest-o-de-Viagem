@@ -1,48 +1,47 @@
-import { Calendar, MapPin, Settings2 } from "lucide-react"
 import { FormEvent, useState } from "react"
 import { DialogCreateActivity } from "./components/DialogCreateActivity"
 import { CreatedAndListedComponents } from "./components/CreatedAndListedComponents"
 import { ListedImportantLinks } from "./components/ListedImportantLinks"
 import { ListedInviteMails } from "./components/ListedInviteMails"
-import { Button } from "../../components/button"
+import { DestinationAndDateHeader } from "./components/destinationAndDateHeader"
+import { api } from "../../services/api"
+import { useParams } from "react-router-dom"
 
 
 
 
 export const TripDetailsPage = () => {
     const [isDialogCreateActivityOpen, setIsDialogCreateActivityOpen] = useState(false)
+    const { tripId} = useParams();
 
     const openAndCloseDialogCreateActivity = () => {
         setIsDialogCreateActivityOpen(!isDialogCreateActivityOpen);
 
     }
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        const data = new FormData(event.currentTarget);
+        const occurs_at = data.get('date')?.toString();
+        const title = data.get('tag')?.toString();
+
+        const response = await api.post(`/trips/${tripId}/activities`,{
+            occurs_at: occurs_at, 
+            title: title
+        })
+
+        console.log(response.data.activityId)
+        
+        setIsDialogCreateActivityOpen(!isDialogCreateActivityOpen);
+        window.document.location.reload();
+        
     }
 
     return (
         <div className=" max-w-6xl px-6 py-10 m-auto space-y-8"  >
-            <header className="w-full h-16 px-6 bg-zinc-900 rounded-lg flex items-center justify-between shadow-shape " >
-                <span className="flex items-center gap-2 text-zinc-100" >
-                    <MapPin className="size-5 text-zinc-400" />
-                    <input disabled type="text" value="Florianópolis, Brasil" className="bg-transparent text-zinc-100 text-lg outline-none" />
-                </span>
-
-                <div className="flex items-center space-x-3">
-                    <div className="flex h-full gap-2 items-center" >
-                        <Calendar className="size-5 text-zinc-400" />
-                        <input disabled type="text" value="17 a 23 de Agosto" className="bg-transparent text-zinc-100 text-lg outline-none" />
-                    </div>
-                    <div className="w-px h-7 bg-zinc-800" />
-
-                    <Button variant={"secondary"}>
-                        Alterar local/data
-                        <Settings2 />
-                    </Button>
-
-                </div>
-            </header>
+            <DestinationAndDateHeader />
 
 
             <main className="flex gap-16 h-full px-6 py-2 ">

@@ -9,6 +9,10 @@ interface DialogCreateActivityProps {
 
 
 export const DialogCreateActivity: React.FC<DialogCreateActivityProps> = ({ handleSubmit, openAndCloseDialogCreateActivity }) => {
+    
+
+
+
     return (
         <div className="bg-zinc-950/80 fixed inset-0 flex items-center justify-center"  >
 

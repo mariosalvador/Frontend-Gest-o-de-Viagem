@@ -3,19 +3,23 @@ import { DialogConfirmTrip } from "./components/DialogConfirmTrip";
 import { DialogConfirmMails } from "./components/DialogConfirmMails";
 import { StepToCreateTrip } from "./components/StepToCreateTrip";
 import { DateRange } from "react-day-picker";
+import { api } from "../../services/api";
+import { useNavigate } from "react-router-dom";
 
 
 export const CreateTripPage = () => {
+  const navigate = useNavigate();
+
   const [isKeepOn, setIsKeepOn] = useState<boolean>(false);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
-  const [emailInvite, setEmailInvite] = useState(["mariopaulo@gmailcom"]);
+  const [emailInvite, setEmailInvite] = useState(["mariopaulo@gmail.com"]);
   const [isDialogConfirmOpen, setIsDialogConfirmOpen] = useState(false);
 
   //
   const [destination, setDestination] = useState('');
-  const [owner_name,setOwner_name] = useState('');
-  const [owner_email,setOwner_email] = useState('')
-  const [evenStartandEnd,setEvenStartandEnd] = useState<DateRange | undefined>(undefined);
+  const [owner_name, setOwner_name] = useState('');
+  const [owner_email, setOwner_email] = useState('')
+  const [evenStartandEnd, setEvenStartandEnd] = useState<DateRange | undefined>(undefined);
 
 
 
@@ -56,16 +60,31 @@ export const CreateTripPage = () => {
     setIsDialogConfirmOpen(!isDialogConfirmOpen);
   }
 
-  const confirmTrip = (event: FormEvent<HTMLElement>) => {
+  const confirmTrip = async (event: FormEvent<HTMLElement>) => {
     event.preventDefault()
 
     console.log(destination)
-    console.log(evenStartandEnd)
+    console.log(evenStartandEnd?.from)
+    console.log(evenStartandEnd?.to)
     console.log(emailInvite)
     console.log(owner_email)
     console.log(owner_name)
 
+    const response = await api.post('/trips', {
+      destination,
+      starts_at: evenStartandEnd?.from,
+      ends_at: evenStartandEnd?.to,
+      emails_to_invite: emailInvite,
+      owner_email: owner_email,
+      owner_name: owner_name
+    })
 
+    const { tripId } = response.data;
+    const to = `trips/${tripId}`;
+    navigate(to)
+
+
+    console.log(tripId)
 
   }
 
