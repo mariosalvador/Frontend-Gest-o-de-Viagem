@@ -5,3 +5,9 @@
 *{
     min-width: 0;
 }
+
+.rdp-root {
+    --rdp-accent-color: rgb(10, 178, 119); /* Change the accent color to indigo. */
+    --rdp-accent-background-color: #212121cb; /* Change the accent background color. */
+    /* Add more CSS variables here. */
+  }

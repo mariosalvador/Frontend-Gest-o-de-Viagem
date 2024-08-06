@@ -2,6 +2,7 @@ import { FormEvent, useState } from "react"
 import { DialogConfirmTrip } from "./components/DialogConfirmTrip";
 import { DialogConfirmMails } from "./components/DialogConfirmMails";
 import { StepToCreateTrip } from "./components/StepToCreateTrip";
+import { DateRange } from "react-day-picker";
 
 
 export const CreateTripPage = () => {
@@ -9,6 +10,13 @@ export const CreateTripPage = () => {
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [emailInvite, setEmailInvite] = useState(["mariopaulo@gmailcom"]);
   const [isDialogConfirmOpen, setIsDialogConfirmOpen] = useState(false);
+
+  //
+  const [destination, setDestination] = useState('');
+  const [owner_name,setOwner_name] = useState('');
+  const [owner_email,setOwner_email] = useState('')
+  const [evenStartandEnd,setEvenStartandEnd] = useState<DateRange | undefined>(undefined);
+
 
 
   const handleIsKeepOn = () => {
@@ -50,6 +58,15 @@ export const CreateTripPage = () => {
 
   const confirmTrip = (event: FormEvent<HTMLElement>) => {
     event.preventDefault()
+
+    console.log(destination)
+    console.log(evenStartandEnd)
+    console.log(emailInvite)
+    console.log(owner_email)
+    console.log(owner_name)
+
+
+
   }
 
 
@@ -69,6 +86,10 @@ export const CreateTripPage = () => {
           handleIsDialogOpen={handleIsDialogOpen}
           handleIsKeepOn={handleIsKeepOn}
           isKeepOn={isKeepOn}
+          evenStartandEnd={evenStartandEnd}
+          setDestination={setDestination}
+          setEvenStartandEnd={setEvenStartandEnd}
+
         />
 
 
@@ -93,6 +114,8 @@ export const CreateTripPage = () => {
             <DialogConfirmTrip
               confirmTrip={confirmTrip}
               handleIsDialogConfirmOpen={handleIsDialogConfirmOpen}
+              setOwner_email={setOwner_email}
+              setOwner_name={setOwner_name}
             />
           )
         }

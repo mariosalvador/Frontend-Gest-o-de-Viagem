@@ -5,10 +5,12 @@ import { Button } from "../../../components/button";
 interface DialogConfirmTripProps {
     handleIsDialogConfirmOpen: () => void;
     confirmTrip: (event: FormEvent<HTMLElement>) => void;
+    setOwner_name: (value: string) => void;
+    setOwner_email: (value: string) => void;
 }
 
 
-export const DialogConfirmTrip: React.FC<DialogConfirmTripProps> = ({ confirmTrip, handleIsDialogConfirmOpen }) => {
+export const DialogConfirmTrip: React.FC<DialogConfirmTripProps> = ({ confirmTrip, handleIsDialogConfirmOpen,setOwner_email,setOwner_name }) => {
 
 
     return (
@@ -32,12 +34,12 @@ export const DialogConfirmTrip: React.FC<DialogConfirmTripProps> = ({ confirmTri
 
                     <div className="flex h-[56px] px-2 gap-2 items-center bg-zinc-950 border border-zinc-800 rounded-md">
                         <User className="size-5 text-zinc-400" />
-                        <input name="name" placeholder="Seu nome completo" className="bg-transparent text-md text-zinc-300 w-[70%]  outline-none" />
+                        <input onChange={(value) => setOwner_name(value.target.value)} name="name" placeholder="Seu nome completo" className="bg-transparent text-md text-zinc-300 w-[70%]  outline-none" />
                     </div>
 
                     <div className="flex h-[56px] px-2 gap-2 items-center bg-zinc-950 border border-zinc-800 rounded-md">
                         <Mail className="size-5 text-zinc-400" />
-                        <input name="email" type="email" placeholder="Seu e-mail pessoal" className="bg-transparent text-md text-zinc-300 w-[70%]  outline-none" />
+                        <input onChange={(value) => setOwner_email(value.target.value)} name="email" type="email" placeholder="Seu e-mail pessoal" className="bg-transparent text-md text-zinc-300 w-[70%]  outline-none" />
                     </div>
 
                     <Button type="submit" variant={"primary"} size="full" >
